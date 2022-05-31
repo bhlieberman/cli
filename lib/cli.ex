@@ -3,6 +3,12 @@ defmodule Files.Options do
   defstruct contents: nil, text: nil, ignore_case: :false
 end
 
+defmodule Errors do
+  defmodule InvalidFlag do
+    defexception message: "Not a valid flag"
+  end
+end
+
 defmodule Files do
   alias Files.Options
 
@@ -31,7 +37,7 @@ defmodule Files do
         rem_flags(rem, opts)
 
       _ ->
-        IO.puts("not a valid flag")
+        raise Errors.InvalidFlag
     end
   end
 
